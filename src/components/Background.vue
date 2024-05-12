@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getData } from '../DataSource.ts'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted,  ref } from 'vue'
 import EventBus from 'js-event-bus'
 import { Background } from '../type/background.ts'
 import SpinePlayer from './SpinePlayer.vue'
@@ -26,13 +26,12 @@ if (data.extraPayload) {
 
 const backgroundIndex = ref(999)
 
-// let timer: NodeJS.Timeout
-
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const backgroundUpdater = async () => {
   const currentDuration = backgroundList[backgroundIndex.value].duration
   await delay(currentDuration > 0 ? currentDuration : data.extraPayload?.screensaverSwitchInterval ?? data.switchInterval * 1000)
+
   backgroundIndex.value = (backgroundIndex.value + 1) % backgroundList.length
   eventBus.emit('backgroundChanged')
   await backgroundUpdater()
@@ -40,12 +39,8 @@ const backgroundUpdater = async () => {
 
 onMounted(() => {
   backgroundIndex.value = 0
-  // timer = setInterval(updateBackground, 5000)
   eventBus.emit('backgroundReady')
   backgroundUpdater()
-})
-onUnmounted(() => {
-  // clearInterval(timer)
 })
 </script>
 
@@ -60,13 +55,16 @@ onUnmounted(() => {
       />
       <video
           v-else-if="index===backgroundIndex && item.type==='video'"
-          :src="item.path"
           autoplay
+          :src="item.path"
           :style="{width: '100%',height: '100%',objectFit: item.fit,position: 'absolute',top: 0,left: 0}"
       />
       <SpinePlayer
           v-else-if="index===backgroundIndex && item.type==='spine'"
           :spine-player-config="item.spinePlayerConfig"
+          :scale="item.scale"
+          :offsetX="item.offsetX"
+          :offsetY="item.offsetY"
       />
     </transition>
   </div>

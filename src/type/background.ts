@@ -21,12 +21,8 @@ type SpineBackground = {
     type: 'spine',
     // spinePlayerConfig: SpinePlayerConfig
     spinePlayerConfig: any
-    // backgroundImage?: {
-    //     url: string;
-    //     x: number;
-    //     y: number;
-    //     width: number;
-    //     height: number;
-    // };
+    scale: number,
+    offsetX: number,
+    offsetY: number,
     duration: number,
 }

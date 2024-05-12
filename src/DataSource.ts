@@ -52,18 +52,17 @@ export function getData(): Payload {
                 //     type: 'video',
                 //     path: './神里龟龟1080P.mp4',
                 //     fit: 'cover',
-                //     duration: 20000,
+                //     duration: 5000,
                 // },
                 {
                     type: 'spine',
                     spinePlayerConfig: {
                         skelUrl: './dyn_illust_char_1028_texas2.skel',
                         atlasUrl: './dyn_illust_char_1028_texas2.atlas',
-                        // animation: 'idle',
                         viewport: {
                             width: 2048,
                             height: 2048,
-                            debugRender: true, // Show the viewport bounds
+                            // debugRender: true, // Show the viewport bounds
                             padLeft: 0,
                             padRight: 0,
                             padTop: 0,
@@ -80,7 +79,10 @@ export function getData(): Payload {
                         backgroundColor: '#00000000', // Background is fully transparent
                         showControls: false,
                     },
-                    duration: 20000,
+                    scale: 1.95,
+                    offsetX: 0.53,
+                    offsetY: 0.5,
+                    duration: 10000,
                 },
             ],
         },
