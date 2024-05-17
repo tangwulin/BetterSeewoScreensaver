@@ -3,16 +3,16 @@ import Background from './components/Background.vue'
 import Content from './components/Content.vue'
 
 const clickHandler = () => {
-  // if (import.meta.env.PROD) {
-  //   window.ipcRenderer.send('windowMessage', {
-  //     windowName: 'screensaver_0',
-  //     eventName: 'closeScreenSaver',
-  //     data: null,
-  //     crossWindowName: null,
-  //   })
-  // } else {
-  //   alert('这不是生产环境，无法关闭屏保')
-  // }
+  if (import.meta.env.PROD) {
+    window.ipcRenderer.send('windowMessage', {
+      windowName: 'screensaver_0',
+      eventName: 'closeScreenSaver',
+      data: null,
+      crossWindowName: null,
+    })
+  } else {
+    alert('这不是生产环境，无法关闭屏保')
+  }
 }
 </script>
 
