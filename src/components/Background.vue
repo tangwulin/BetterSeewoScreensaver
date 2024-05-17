@@ -56,6 +56,7 @@ onMounted(() => {
       <video
           v-else-if="index===backgroundIndex && item.type==='video'"
           autoplay
+          muted
           :src="item.path"
           :style="{width: '100%',height: '100%',objectFit: item.fit,position: 'absolute',top: 0,left: 0}"
       />
