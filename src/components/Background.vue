@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getData } from '../DataSource.ts'
-import { onMounted,  ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import EventBus from 'js-event-bus'
 import { Background } from '../type/background.ts'
 import SpinePlayer from './SpinePlayer.vue'
@@ -10,9 +10,17 @@ const eventBus = new EventBus()
 const data = getData()
 
 let backgroundList: Background[]
+let videoList: string[] = []
 
 if (data.extraPayload) {
   backgroundList = data.extraPayload.screensaverContent
+  data.extraPayload.screensaverContent
+      .map((item) => {
+        if (item.type === 'video') {
+          videoList.push(item.path)
+        }
+      })
+
 } else {
   backgroundList = data.imageList.map((item) => {
     return {
@@ -45,6 +53,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <video v-for="item in videoList" :key="item" :src="item" preload="auto" style="display: none"/>
   <div style="height: 100vh;width: 100vw;background: #000;">
     <transition v-for="(item,index) in backgroundList" :key="index" name="fade">
       <img
