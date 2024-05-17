@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vueuse/core": "^10.9.0",
     "dayjs": "^1.11.11",
     "js-event-bus": "^1.1.1",
     "vue": "^3.4.21"
